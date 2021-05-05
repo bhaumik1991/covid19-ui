@@ -18,6 +18,11 @@ class WeeklyChart extends StatelessWidget {
             bottomTitles: SideTitles(
               showTitles: true,
               getTitles: getWeek,
+              getTextStyles: (value) => const TextStyle(
+                color: Color(0xFF7589A2),
+                fontSize: 10,
+                fontWeight: FontWeight.bold
+              )
             ),
           ),
         ),
@@ -29,23 +34,21 @@ class WeeklyChart extends StatelessWidget {
     List<double> barChartDatas = [6, 10, 8, 7, 10, 15, 9];
     List<BarChartGroupData> barChartGroups = [];
 
-    barChartDatas.asMap().forEach((i, value) {
-      barChartGroups.add(
-        BarChartGroupData(
-            x: i,
-          barRods: [
-            BarChartRodData(
-              y: value,
-              colors: [i == 4 ? kPrimaryColor : kInactiveChartColor],
-              width: 16,
-            ),
-          ],
+    barChartDatas.asMap().forEach(
+        (i, value) => barChartGroups.add(
+          BarChartGroupData(
+              x: i,
+              barRods: [
+                BarChartRodData(
+                    y: value,
+                    colors: [i == 4 ? kPrimaryColor : kInactiveChartColor],
+                  width: 16
+                ),
+              ],
+          ),
         ),
-      );
-      return barChartGroups;
-    });
-
-
+    );
+    return barChartGroups;
   }
 
   String getWeek(double value) {
